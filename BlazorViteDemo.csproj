@@ -1,0 +1,46 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Vite.AspNetCore" Version="2.0.0" />
+  </ItemGroup>
+
+  <Target Name="EnsureNodeEnv" BeforeTargets="BeforeBuild" Condition="!Exists('node_modules')">
+    <!-- Ensure Node.js is installed -->
+    <Exec Command="node --version" ContinueOnError="true">
+      <Output TaskParameter="ExitCode" PropertyName="ErrorCode" />
+    </Exec>
+    <Error Condition="'$(ErrorCode)' != '0'" Text="Node.js is required to build and run this project. To continue, please install Node.js and then restart your IDE." />
+      
+    <Message Importance="high" Text="Restoring dependencies using 'npm install'. This may take several minutes..." />
+    <Exec Command="npm install" />
+  </Target>
+
+  <Target Name="NpmInstall" Inputs="package.json" Outputs="node_modules/.install-stamp">
+	  <Message Importance="high" Text="Restoring new dependencies using 'npm install'. This may take several minutes..." />
+	  <Exec Command="npm install" />
+
+	  <!-- Write the stamp file, so incremental builds work -->
+	  <Touch Files="node_modules/.install-stamp" AlwaysCreate="true" />
+  </Target>
+
+  <Target Name="NpmRunBuild" DependsOnTargets="NpmInstall" BeforeTargets="Build">
+	  <Message Importance="high" Text="Running NPM build" />
+	  <Exec Command="npm run build" />
+  </Target>
+
+  <Target Name="NpmRunPublish" AfterTargets="ComputeFilesToPublish" Condition="'$(Configuration)' == 'Release'">
+	  <!-- As part of publishing, ensure everything is up to date and that Webpack is run in production mode -->
+	  <Message Importance="high" Text="Ensuring dependencies are up to date using 'npm install'. This may take several minutes..." />
+	  <Exec Command="npm install" />
+
+	  <Message Importance="high" Text="Running NPM publish" />
+	  <Exec Command="npm run publish" />
+  </Target>
+
+</Project>

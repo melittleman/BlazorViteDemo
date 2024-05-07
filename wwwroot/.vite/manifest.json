@@ -1,0 +1,20 @@
+{
+  "_lib-DiaGsIN1.chunk.min.js": {
+    "file": "js/lib-DiaGsIN1.chunk.min.js",
+    "name": "lib"
+  },
+  "scripts/app.js": {
+    "file": "js/app-D_szrC64.bundle.min.js",
+    "name": "app",
+    "src": "scripts/app.js",
+    "isEntry": true,
+    "imports": [
+      "_lib-DiaGsIN1.chunk.min.js"
+    ]
+  },
+  "styles/app.scss": {
+    "file": "css/app-DM3I3-Rx.bundle.min.css",
+    "src": "styles/app.scss",
+    "isEntry": true
+  }
+}

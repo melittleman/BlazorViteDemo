@@ -1,0 +1,24 @@
+{
+  "name": "blazorvitedemo",
+  "version": "0.0.1",
+  "description": "A .NET 8 demo of Blazor working with Vite for hot module replacement and building for production.",
+  "type": "module",
+  "keywords": [ "Blazor", "Vite" ],
+  "author": "melittleman",
+  "license": "ISC",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "echo Starting the development server && vite",
+    "dev": "vite",
+    "build": "vite build --mode development",
+    "publish": "vite build --mode production"
+  },
+  "devDependencies": {
+    "sass": "npm:sass-embedded@^1.77.0",
+    "vite": "^5.2.11",
+    "vite-plugin-mkcert": "^1.17.5"
+  },
+  "dependencies": {
+    "bootstrap": "^5.3.3"
+  }
+}
