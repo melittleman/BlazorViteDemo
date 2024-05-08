@@ -6,7 +6,7 @@ import { Vite } from "./appsettings.Development.json";
 
 export default defineConfig({
     appType: "custom",
-    root: "Client",
+    root: path.resolve(__dirname, "Client"),
     plugins: [ mkcert() ],
     resolve: {
         alias: { "~": __dirname }
@@ -14,12 +14,12 @@ export default defineConfig({
     build: {
         manifest: true,
         emptyOutDir: true,
-        outDir: path.join(__dirname, "wwwroot"),
+        outDir: path.resolve(__dirname, "wwwroot"),
         assetsDir: "",
         rollupOptions: {
             input: [ 
-                path.join(__dirname, "Client", "scripts", "app.js"), 
-                path.join(__dirname, "Client", "styles", "app.scss")
+                path.resolve(__dirname, "Client/scripts/app.js"), 
+                path.resolve(__dirname, "Client/styles/app.scss")
             ],
             output: {
                 entryFileNames: "js/[name]-[hash].bundle.min.js",
